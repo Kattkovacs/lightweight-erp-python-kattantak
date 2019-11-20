@@ -16,7 +16,7 @@ from accounting import accounting
 from sales import sales
 # Customer Relationship Management (CRM) module
 from crm import crm
-
+ 
 
 def choose():
     inputs = ui.get_inputs(["Please enter a number: "], "")

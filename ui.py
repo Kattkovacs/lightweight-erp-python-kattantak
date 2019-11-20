@@ -22,7 +22,18 @@ def print_table(table, title_list):
         None: This function doesn't return anything it only prints to console.
     """
 
-    # your goes code
+    table.insert(0, title_list)
+    lengths_of_lists = []
+    for list in table:
+        for element in range(len(list)):
+            lengths_of_lists.append(len(element))
+
+
+
+
+    for row in table:
+        print(row)
+
 
 
 def print_result(result, label):
@@ -61,8 +72,10 @@ def print_menu(title, list_options, exit_message):
         None: This function doesn't return anything it only prints to console.
     """
 
-    # your code
-
+    print(title)
+    for item in range(len(list_options)):
+        print(f"({item+1}) {list_options[item]}")
+    print(f"(0) {exit_message}")
 
 def get_inputs(list_labels, title):
     """
@@ -85,7 +98,8 @@ def get_inputs(list_labels, title):
     """
     inputs = []
 
-    # your code
+    for question in list_labels:
+        inputs.append(input(question))
 
     return inputs
 

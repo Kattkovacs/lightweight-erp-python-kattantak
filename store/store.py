@@ -27,8 +27,36 @@ def start_module():
     Returns:
         None
     """
+    options = ["Show table",
+               "Add item",
+               "Remove item",
+               "Update item",
+               "Get counts by manufacturers",
+               "Get average by manufacturer"]
 
-    # your code
+    ui.print_menu("Store menu", options, "Exit to main menu")
+
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+
+    table = data_manager.get_table_from_file('store/games.csv')
+
+    option = inputs[0]
+    if option == "1":
+        show_table(table)
+    elif option == "2":
+        add()
+    elif option == "3":
+        remove()
+    elif option == "4":
+        update()
+    elif option == "5":
+        get_counts_by_manufacturers()
+    elif option == "6":
+        get_average_by_manufacturer()
+    elif option == "0":
+        pass
+    else:
+        raise KeyError("There is no such option.")
 
 
 def show_table(table):
@@ -42,7 +70,8 @@ def show_table(table):
         None
     """
 
-    # your code
+    title_list = [1, 2, 3, 4, 5]
+    ui.print_table(table, title_list)
 
 
 def add(table):
