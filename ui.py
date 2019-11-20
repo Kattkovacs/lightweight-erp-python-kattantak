@@ -23,16 +23,26 @@ def print_table(table, title_list):
     """
 
     table.insert(0, title_list)
-    lengths_of_lists = []
-    for list in table:
-        for element in range(len(list)):
-            lengths_of_lists.append(len(element))
+    length_of_lists = []
+    for element in range(len(title_list)):
+        length_of_lists.append(int(0))
+    for row in table:
+        for element in range(len(row)):
+            if len(str(row[element])) > length_of_lists[element]:
+                length_of_lists[element] = len(str(row[element]))
+    length = sum(length_of_lists)
+    print(length*"-")
 
 
 
 
     for row in table:
-        print(row)
+        print(f"| {row} |")
+        print(length * "-")
+
+    #for row in table:
+    #    print("| " + str(*row, sep=" | ") + " |")
+    #    print(length * "-")
 
 
 
