@@ -18,8 +18,10 @@ def generate_random(table):
         string: Random and unique string
     """
 
-    generated = ''
-
-    # your code
-
+    generated = ''    
+    two_random_letters_low = "".join(random.choice(string.ascii_lowercase) for i in range(2))
+    two_random_letters_high = "".join(random.choice(string.ascii_uppercase) for i in range(2))
+    two_random_numbers = "".join(random.choice(string.digits) for i in range(2))
+    #two_spec_chars = "".join(random.choice("!\"#$%&'()*+, -./:<=>?@[\]^_`{|}~") for i in range(2))
+    generated = random.choice(string.ascii_lowercase) + random.choice(string.ascii_uppercase) + two_random_numbers + random.choice(string.ascii_uppercase) + random.choice(string.ascii_lowercase) + "#&"
     return generated

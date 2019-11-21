@@ -28,7 +28,36 @@ def start_module():
         None
     """
 
-    # your code
+    options = ["Show table",
+               "Add item",
+               "Remove item",
+               "Update item",
+               "Get purchase year",
+               "Get durability"]
+
+    ui.print_menu("Inventory menu", options, "Exit to main menu")
+
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+
+    table = data_manager.get_table_from_file('inventory/inventory.csv')
+
+    option = inputs[0]
+    if option == "1":
+        show_table(table)
+    elif option == "2":
+        add()
+    elif option == "3":
+        remove()
+    elif option == "4":
+        update()
+    elif option == "5":
+        get_available_items()
+    elif option == "6":
+        get_average_durability_by_manufacturers()
+    elif option == "0":
+        pass
+    else:
+        raise KeyError("There is no such option.")
 
 
 def show_table(table):
@@ -42,7 +71,8 @@ def show_table(table):
         None
     """
 
-    # your code
+    title_list = ["id", "name", "manufacturer", "purchase_year", "durability"]
+    ui.print_table(table, title_list)
 
 
 def add(table):

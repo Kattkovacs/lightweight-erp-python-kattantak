@@ -40,6 +40,8 @@ def print_table(table, title_list):
         print(f"| {row} |")
         print(length * "-")
 
+
+
     #for row in table:
     #    print("| " + str(*row, sep=" | ") + " |")
     #    print(length * "-")
