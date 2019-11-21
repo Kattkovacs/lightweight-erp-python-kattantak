@@ -27,7 +27,36 @@ def start_module():
         None
     """
 
-    # your code
+    options = ["Show table",
+               "Add item",
+               "Remove item",
+               "Update item",
+               "Get longest name id",
+               "Get subscribed emails"]
+
+    ui.print_menu("CRM menu", options, "Exit to main menu")
+
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+
+    table = data_manager.get_table_from_file('crm/customers.csv')
+
+    option = inputs[0]
+    if option == "1":
+        show_table(table)
+    elif option == "2":
+        add()
+    elif option == "3":
+        remove()
+    elif option == "4":
+        update()
+    elif option == "5":
+        get_longest_name_id()
+    elif option == "6":
+        get_subscribed_emails()
+    elif option == "0":
+        pass
+    else:
+        raise KeyError("There is no such option.")
 
 
 def show_table(table):
@@ -41,7 +70,8 @@ def show_table(table):
         None
     """
 
-    # your code
+    title_list = ["id", "name", "email", "subscribed"]
+    ui.print_table(table, title_list)
 
 
 def add(table):
