@@ -88,8 +88,6 @@ def add(table):
         list: Table with a new record
     """
 
-    list = 
-
     return table
 
 
