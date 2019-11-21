@@ -26,7 +26,36 @@ def start_module():
         None
     """
 
-    # your code
+    options = ["Show table",
+                "Add item",
+                "Remove item",
+                "Update item",
+                "Get oldest person",
+                "Get persons closest to average"]
+
+    ui.print_menu("HR menu", options, "Exit to main menu")
+
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+
+    table = data_manager.get_table_from_file('hr/persons.csv')
+
+    option = inputs[0]
+    if option == "1":
+        show_table(table)
+    elif option == "2":
+        add(table)
+    elif option == "3":
+        remove()
+    elif option == "4":
+        update()
+    elif option == "5":
+        get_oldest_person()
+    elif option == "6":
+        get_persons_closest_to_average()
+    elif option == "0":
+        pass
+    else:
+        raise KeyError("There is no such option.")
 
 
 def show_table(table):
@@ -40,8 +69,8 @@ def show_table(table):
         None
     """
 
-    # your code
-
+    title_list = ["id", "name", "birth_year"]
+    ui.print_table(table, title_list)
 
 def add(table):
     """
@@ -54,7 +83,11 @@ def add(table):
         list: Table with a new record
     """
 
-    # your code
+    new_line = ["", "", ""]
+    new_line[0] = common.generate_random(table) 
+    new_line[1], new_line[2] = input("What's the name of main actor/actress? "), input("When was the film made? ")
+    table.append(new_line)
+    data_manager.write_table_to_file("hr/persons.csv", table)
 
     return table
 
@@ -72,6 +105,8 @@ def remove(table, id_):
     """
 
     # your code
+    
+
 
     return table
 

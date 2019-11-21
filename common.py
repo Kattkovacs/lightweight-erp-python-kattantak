@@ -19,9 +19,9 @@ def generate_random(table):
     """
 
     generated = ''    
-    two_random_letters_low = "".join(random.choice(string.ascii_lowercase) for i in range(2))
-    two_random_letters_high = "".join(random.choice(string.ascii_uppercase) for i in range(2))
-    two_random_numbers = "".join(random.choice(string.digits) for i in range(2))
+    two_random_letters_low = "".join(random.choice("abcdefghijklmnopqrstvwxyz") for i in range(2))
+    two_random_letters_high = "".join(random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ") for i in range(2))
+    two_random_numbers = "".join(random.choice("0123456789") for i in range(2))
     #two_spec_chars = "".join(random.choice("!\"#$%&'()*+, -./:<=>?@[\]^_`{|}~") for i in range(2))
-    generated = random.choice(string.ascii_lowercase) + random.choice(string.ascii_uppercase) + two_random_numbers + random.choice(string.ascii_uppercase) + random.choice(string.ascii_lowercase) + "#&"
+    generated = random.choice("abcdefghijklmnopqrstvwxyz") + random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ") + two_random_numbers + random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ") + random.choice("abcdefghijklmnopqrstvwxyz") + "#&"
     return generated
