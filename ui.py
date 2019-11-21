@@ -31,21 +31,17 @@ def print_table(table, title_list):
             if len(str(row[element])) > length_of_lists[element]:
                 length_of_lists[element] = len(str(row[element]))
     length = sum(length_of_lists)
-    print(length*"-")
 
-
-
-
+    print("\n")
+    print(length * "-")
+    
     for row in table:
-        print(f"| {row} |")
+        for item in row:
+            print(item, end=" | ")
+        print("")
         print(length * "-")
-
-
-
-    #for row in table:
-    #    print("| " + str(*row, sep=" | ") + " |")
-    #    print(length * "-")
-
+    
+    print("\n")
 
 
 def print_result(result, label):
