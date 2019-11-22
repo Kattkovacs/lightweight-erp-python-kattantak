@@ -34,13 +34,13 @@ def print_table(table, title_list):
 
     print("\n")
     print(length * "-")
-    
+
     for row in table:
         for item in row:
             print(item, end=" | ")
         print("")
         print(length * "-")
-    
+
     print("\n")
 
 

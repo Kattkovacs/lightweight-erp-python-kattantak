@@ -105,7 +105,9 @@ def remove(table, id_):
     """
 
     # your code
-    
+    #for item in table:
+    #    if item[0] == id_:
+    #        table.remove(item)
 
 
     return table
