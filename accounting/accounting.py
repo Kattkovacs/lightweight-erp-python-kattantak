@@ -87,7 +87,15 @@ def add(table):
         list: Table with a new record
     """
 
-    # your code
+    new_line = ["", "", ""]
+    new_line[0] = common.generate_random(table) 
+    new_line[1] = input("When was it bought? Month of transaction: ") 
+    new_line[2] = input("When was it bought? Day of transaction: ")
+    new_line[3] = input("When was it bought? Year of transaction: ")
+    new_line[4] = input("Was it input or outflaw? (\"In\"/\"Out\") ")
+    new_line[5] = input("Amount of transaction: ")
+    table.append(new_line)
+    data_manager.write_table_to_file("hr/persons.csv", table)
 
     return table
 
