@@ -32,8 +32,8 @@ def start_module():
                "Add item",
                "Remove item",
                "Update item",
-               "Get purchase year",
-               "Get durability"]
+               "Get available items",
+               "Get average durability by manufacturers"]
 
     ui.print_menu("Inventory menu", options, "Exit to main menu")
 
@@ -45,11 +45,13 @@ def start_module():
     if option == "1":
         show_table(table)
     elif option == "2":
-        add()
+        add(table)
     elif option == "3":
-        remove()
+        id_ = input("Add an ID: ")
+        remove(table, id_)
     elif option == "4":
-        update()
+        id_ = input("Add an ID: ")
+        update(table, id_)
     elif option == "5":
         get_available_items()
     elif option == "6":
@@ -86,7 +88,18 @@ def add(table):
         list: Table with a new record
     """
 
-    # your code
+    new_line = ["", "", "", "", ""]
+    new_line[0] = common.generate_random(table) 
+    name = ui.get_inputs(["What's the name of the game? "], "") 
+    manufacturer = ui.get_inputs(["Who is the manufacturer? "], "")
+    year = ui.get_inputs(["When was it bought? Year of transaction: "], "")
+    durability = ui.get_inputs(["How many years is it still durable? "], "")
+    new_line[1] = name[0]
+    new_line[2] = manufacturer[0]
+    new_line[3] = year[0]
+    new_line[4] = durability[0]
+    table.append(new_line)
+    data_manager.write_table_to_file('inventory/inventory.csv', table)
 
     return table
 
@@ -103,7 +116,10 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    # your code
+    for line in table:
+        if line[0] == id_:
+            table.remove(line)
+            data_manager.write_table_to_file("inventory/inventory.csv", table)
 
     return table
 
@@ -120,7 +136,23 @@ def update(table, id_):
         list: table with updated record
     """
 
-    # your code
+    for line in table:
+        if line[0] == id_:
+            item_to_be_changed = ui.get_inputs(["What do you want to update (\"name\"/\"manufacturer\"/\"purchase_year\"/\"durability\"): "], "")
+            if item_to_be_changed[0] == "name":
+                name = ui.get_inputs(["What is the new name: "], "")
+                line[1] = name[0]
+            elif item_to_be_changed[0] == "manufacturer":
+                manufacturer = ui.get_inputs(["Who is the \"new\" manufacturer: "], "")
+                line[2] = manufacturer[0]
+            elif item_to_be_changed[0] == "purchase_year":
+                year_of_purchase = ui.get_inputs(["What is the \"new\" year of purchase: "], "")
+                line[3] = year_of_purchase[0]
+            elif item_to_be_changed[0] == "durability":
+                durability = ui.get_inputs(["What is the new durability (in years): "], "")
+                line[4] = durability[0]
+            
+            data_manager.write_table_to_file("inventory/inventory.csv", table)    
 
     return table
 

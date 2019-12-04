@@ -10,6 +10,7 @@ Data table structure:
     * amount (int): amount of transaction in USD
 """
 
+
 # everything you'll need is imported:
 # User interface module
 import ui
@@ -46,11 +47,13 @@ def start_module():
     if option == "1":
         show_table(table)
     elif option == "2":
-        add()
+        add(table)
     elif option == "3":
-        remove()
+        id_ = input("Add an ID: ")
+        remove(table, id_)
     elif option == "4":
-        update()
+        id_ = input("Add an ID: ")
+        update(table, id_)
     elif option == "5":
         which_year_max()
     elif option == "6":
@@ -87,15 +90,20 @@ def add(table):
         list: Table with a new record
     """
 
-    new_line = ["", "", ""]
+    new_line = ["", "", "", "", "", ""]
     new_line[0] = common.generate_random(table) 
-    new_line[1] = input("When was it bought? Month of transaction: ") 
-    new_line[2] = input("When was it bought? Day of transaction: ")
-    new_line[3] = input("When was it bought? Year of transaction: ")
-    new_line[4] = input("Was it input or outflaw? (\"In\"/\"Out\") ")
-    new_line[5] = input("Amount of transaction: ")
+    month = ui.get_inputs(["When was it bought? Month of transaction: "], "") 
+    day = ui.get_inputs(["When was it bought? Day of transaction: "], "")
+    year = ui.get_inputs(["When was it bought? Year of transaction: "], "")
+    in_out = ui.get_inputs(["Was it input or outflaw? (\"in\"/\"out\") "], "")
+    amount = ui.get_inputs(["Amount of transaction: "], "")
+    new_line[1] = month[0]
+    new_line[2] = day[0]
+    new_line[3] = year[0]
+    new_line[4] = in_out[0]
+    new_line[5] = amount[0]
     table.append(new_line)
-    data_manager.write_table_to_file("hr/persons.csv", table)
+    data_manager.write_table_to_file('accounting/items.csv', table)
 
     return table
 
@@ -112,7 +120,10 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    # your code
+    for line in table:
+        if line[0] == id_:
+            table.remove(line)
+            data_manager.write_table_to_file("accounting/items.csv", table)
 
     return table
 
@@ -129,7 +140,28 @@ def update(table, id_):
         list: table with updated record
     """
 
-    # your code
+    for line in table:
+        if line[0] == id_:
+            item_to_be_changed = ui.get_inputs(["What do you want to update (\"month\"/\"day\"/\"year\"/\"type\"/\"amount\"): "], "")
+            if item_to_be_changed[0] == "month":
+                month = ui.get_inputs(["What is the new month of transaction: "], "")
+                line[1] = month[0]
+            elif item_to_be_changed[0] == "day":
+                year = ui.get_inputs(["What is the new day of transaction: "], "")
+                line[2] = day[0]
+            elif item_to_be_changed[0] == "year":
+                year = ui.get_inputs(["What is the new year of transaction: "], "")
+                line[3] = year[0]
+            elif item_to_be_changed[0] == "type":
+                if line[4] == "in":
+                    line[4] = "out"
+                elif line[4] == "out":
+                    line[4] = "in"
+            elif item_to_be_changed[0] == "amount":
+                amount = ui.get_inputs(["What is the new amount: "], "")
+                line[5] = amount[0]
+
+            data_manager.write_table_to_file("accounting/items.csv", table)    
 
     return table
 

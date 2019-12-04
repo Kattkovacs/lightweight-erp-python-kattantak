@@ -1,5 +1,5 @@
 """ User Interface (UI) module """
-
+import os
 
 def print_table(table, title_list):
     """
@@ -108,7 +108,7 @@ def get_inputs(list_labels, title):
 
     for question in list_labels:
         inputs.append(input(question))
-
+    os.system('clear')
     return inputs
 
 

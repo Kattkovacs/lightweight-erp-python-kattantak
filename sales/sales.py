@@ -46,11 +46,13 @@ def start_module():
     if option == "1":
         show_table(table)
     elif option == "2":
-        add()
+        add(table)
     elif option == "3":
-        remove()
+        id_ = input("Add an ID: ")
+        remove(table, id_)
     elif option == "4":
-        update()
+        id_ = input("Add an ID: ")
+        update(table, id_)
     elif option == "5":
         get_lowest_price_item_id()
     elif option == "6":
@@ -88,7 +90,20 @@ def add(table):
         list: Table with a new record
     """
 
-    return table
+    new_line = ["", "", "", "", "", ""]
+    new_line[0] = common.generate_random(table)
+    title = ui.get_inputs(["What's the title of the game? "], "")
+    price = ui.get_inputs(["What's the actual sale price of the game? "], "")
+    month = ui.get_inputs(["When was it sold? Month of transaction: "], "")
+    day = ui.get_inputs(["When was it sold? Day of transaction: "], "")
+    year = ui.get_inputs(["When was it sold? Year of transaction: "], "")
+    new_line[1] = title[0]
+    new_line[2] = price[0]
+    new_line[3] = month[0]
+    new_line[4] = day[0]
+    new_line[5] = year[0]
+    table.append(new_line)
+    data_manager.write_table_to_file('sales/sales.csv', table)
 
 
 def remove(table, id_):
@@ -103,7 +118,10 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    # your code
+    for line in table:
+        if line[0] == id_:
+            table.remove(line)
+            data_manager.write_table_to_file("sales/sales.csv", table)
 
     return table
 
@@ -120,7 +138,26 @@ def update(table, id_):
         list: table with updated record
     """
 
-    # your code
+    for line in table:
+        if line[0] == id_:
+            item_to_be_changed = ui.get_inputs(["What do you want to update (\"title\"/\"price\"/\"month\"/\"day\"/\"year\"): "], "")
+            if item_to_be_changed[0] == "title":
+                title = ui.get_inputs(["What is the new title: "], "")
+                line[1] = title[0]
+            elif item_to_be_changed[0] == "price":
+                price = ui.get_inputs(["What is the new price: "], "")
+                line[2] = price[0]
+            elif item_to_be_changed[0] == "month":
+                month = ui.get_inputs(["What is the new month: "], "")
+                line[3] = month[0]
+            elif item_to_be_changed[0] == "day":
+                day = ui.get_inputs(["What is the new day: "], "")
+                line[4] = day[0]
+            elif item_to_be_changed[0] == "year":
+                year = ui.get_inputs(["What is the new year: "], "")
+                line[5] = year[0]
+
+            data_manager.write_table_to_file("sales/sales.csv", table)    
 
     return table
 
