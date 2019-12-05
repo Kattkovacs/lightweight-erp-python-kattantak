@@ -44,11 +44,13 @@ def start_module():
     if option == "1":
         show_table(table)
     elif option == "2":
-        add()
+        add(table)
     elif option == "3":
-        remove()
+        id_ = input("Add an ID: ")
+        remove(table, id_)
     elif option == "4":
-        update()
+        id_ = input("Add an ID: ")
+        update(table, id_)
     elif option == "5":
         get_longest_name_id()
     elif option == "6":
@@ -85,7 +87,17 @@ def add(table):
         list: Table with a new record
     """
 
-    # your code
+    
+    new_line = ["", "", "", ""]
+    new_line[0] = common.generate_random(table) 
+    name = ui.get_inputs(["What is the name?: "], "") 
+    email = ui.get_inputs(["What is the email adress?: "], "")
+    subscribed = ui.get_inputs(["When it was subscribed?: "], "")
+    new_line[1] = name[0]
+    new_line[2] = email[0]
+    new_line[3] = subscribed[0]
+    table.append(new_line)
+    data_manager.write_table_to_file('crm/customers.csv', table)
 
     return table
 
@@ -102,7 +114,10 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    # your code
+    for line in table:
+        if line[0] == id_:
+            table.remove(line)
+            data_manager.write_table_to_file("crm/customers.csv", table)
 
     return table
 
@@ -119,7 +134,20 @@ def update(table, id_):
         list: table with updated record
     """
 
-    # your code
+    for line in table:
+        if line[0] == id_:
+            item_to_be_changed = ui.get_inputs(["What do you want to update (\"name\"/\"email\"/\"subscribed\"): "], "")
+            if item_to_be_changed[0] == "name":
+                name = ui.get_inputs(["What is the new name: "], "")
+                line[1] = name[0]
+            elif item_to_be_changed[0] == "email":
+                email = ui.get_inputs(["What is the new email: "], "")
+                line[2] = email[0]
+            elif item_to_be_changed[0] == "subscribed":
+                subscribed = ui.get_inputs(["Who is the new subscriber: "], "")
+                line[3] = subscribed[0]
+
+            data_manager.write_table_to_file("crm/customers.csv", table)    
 
     return table
 

@@ -147,7 +147,7 @@ def update(table, id_):
                 month = ui.get_inputs(["What is the new month of transaction: "], "")
                 line[1] = month[0]
             elif item_to_be_changed[0] == "day":
-                year = ui.get_inputs(["What is the new day of transaction: "], "")
+                day= ui.get_inputs(["What is the new day of transaction: "], "")
                 line[2] = day[0]
             elif item_to_be_changed[0] == "year":
                 year = ui.get_inputs(["What is the new year of transaction: "], "")

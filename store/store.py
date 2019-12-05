@@ -41,14 +41,16 @@ def start_module():
     table = data_manager.get_table_from_file('store/games.csv')
 
     option = inputs[0]
-    if option == "1":
+    if option == "1": 
         show_table(table)
     elif option == "2":
-        add()
+        add(table)
     elif option == "3":
-        remove()
+        id_ = input("Add an ID: ")
+        remove(table, id_)
     elif option == "4":
-        update()
+        id_ = input("Add an ID: ")
+        update(table, id_)
     elif option == "5":
         get_counts_by_manufacturers()
     elif option == "6":
@@ -85,7 +87,20 @@ def add(table):
         list: Table with a new record
     """
 
-    # your code
+
+    new_line = ["", "", "", "", ""]
+    new_line[0] = common.generate_random(table) 
+    title = ui.get_inputs(["What is the title?: "], "") 
+    manufacturer = ui.get_inputs(["What is the manufacturer adress?: "], "")
+    price = ui.get_inputs(["What is the price?: "], "")
+    in_stock = ui.get_inputs(["How much is in stock?: "], "")
+    new_line[1] = title[0]
+    new_line[2] = manufacturer[0]
+    new_line[3] = price[0]
+    new_line[4] = in_stock[0]
+    table.append(new_line)
+    data_manager.write_table_to_file('store/games.csv', table)
+
 
     return table
 
@@ -102,7 +117,11 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    # your code
+    for line in table:
+        if line[0] == id_:
+            table.remove(line)
+            data_manager.write_table_to_file("store/games.csv", table)
+
 
     return table
 
@@ -119,7 +138,23 @@ def update(table, id_):
         list: table with updated record
     """
 
-    # your code
+    for line in table:
+        if line[0] == id_:
+            item_to_be_changed = ui.get_inputs(["What do you want to update (\"title\"/\"manufacturer\"/\"price\"): "], "")
+            if item_to_be_changed[0] == "title":
+                title = ui.get_inputs(["What is the new title: "], "")
+                line[1] = title[0]
+            elif item_to_be_changed[0] == "manufacturer":
+                manufacturer = ui.get_inputs(["What is the new manufacturer: "], "")
+                line[2] = manufacturer[0]
+            elif item_to_be_changed[0] == "price":
+                price = ui.get_inputs(["What is the new price: "], "")
+                line[3] = price[0]
+            elif item_to_be_changed[0] == "in_stock":
+                in_stock = ui.get_inputs(["How much is in stock: "], "")
+                line[3] = in_stock[0]
+
+            data_manager.write_table_to_file("store/games.csv", table)    
 
     return table
 
@@ -147,7 +182,7 @@ def get_average_by_manufacturer(table, manufacturer):
 
     Args:
         table (list): data table to work on
-        manufacturer (str): Name of manufacturer
+        manufacturer (str): title of manufacturer
 
     Returns:
          number
